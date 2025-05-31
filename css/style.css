@@ -179,8 +179,17 @@ section {
     height: auto;
     width: 100%;
     border-radius: 40px;
-
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
+
+.about-img img:hover {
+    transform: translateY(-8px);
+    cursor: pointer;
+    box-shadow:
+        0 0 4px 2px #2e6b2e,       /* subtle darker green glow */
+        0 0 8px 4px rgba(46, 107, 46, 0.6); /* softer outer glow */
+}
+
 
 .about-text h2 {
     font-size: var(--h2-font);
@@ -225,11 +234,18 @@ section {
 
 .services-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+    grid-template-columns: repeat(2, 1fr); /* Always 2 columns */
     align-items: center;
     gap: 2.5rem;
     margin-top: 5rem;
 }
+
+/* Make the last box span both columns if it's alone in the row */
+.services-content > .box:only-child,
+.services-content > .box:nth-last-child(1):nth-child(odd) {
+    grid-column: span 2;
+}
+
 
 .box {
     background: var(--bg-color);
@@ -261,6 +277,9 @@ section {
 .box:hover {
     transform: translateY(-8px);
     cursor: pointer;
+    box-shadow:
+        0 0 4px 2px #2e6b2e,       /* subtle darker green glow */
+        0 0 8px 4px rgba(46, 107, 46, 0.6); /* softer outer glow */
 }
 
 .portfolio-content {
@@ -312,6 +331,13 @@ section {
     font-size: 1rem;
     line-height: 1.8;
 
+}
+
+.box-link {
+  display: inline-block; /* or use flex/grid on container */
+  vertical-align: top; /* aligns nicely when inline-block */
+  text-decoration: none;
+  color: inherit;
 }
 
 .layer i {
@@ -557,6 +583,111 @@ form textarea {
     border-radius: 10px;
   }
 
-  .download-button:hover {
+.download-button:hover {
     background-color: #45a049; 
+}
+.services-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 2rem;
+}
+
+.project-box {
+	background-color: var(--second-bg-color);
+	border-radius: 12px;
+	padding: 20px;
+	transition: transform 0.3s ease;
+}
+
+.project-box:hover {
+	transform: translateY(-5px);
+}
+
+.project-box h3 {
+	color: var(--main-color);
+	font-size: 22px;
+	margin-bottom: 10px;
+}
+
+.project-box p {
+	color: var(--second-color);
+	font-size: 16px;
+	line-height: 1.6;
+	margin-bottom: 15px;
+}
+
+.github-link {
+	display: inline-block;
+	color: var(--text-color);
+	background: var(--main-color);
+	padding: 10px 15px;
+	border-radius: 5px;
+	font-weight: 500;
+	transition: background 0.3s;
+}
+
+.github-link:hover {
+	background: #36893b;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header {
+    padding: 20px 40px;
   }
+
+  .navlist {
+    position: absolute;
+    top: 100%;
+    right: -100%;
+    background: #111;
+    width: 200px;
+    height: 100vh;
+    flex-direction: column;
+    gap: 30px;
+    padding: 40px 20px;
+    transition: right 0.3s ease-in-out;
+  }
+
+  .navlist.open {
+    right: 0;
+  }
+
+  #menu-icon {
+    display: block;
+  }
+
+  .home-text h1 {
+    font-size: 36px;
+  }
+
+  .home-text p {
+    font-size: 16px;
+  }
+
+  .about h2,
+  .services h2,
+  .contact h2 {
+    font-size: 28px;
+  }
+}
+.typed-text {
+  font-weight: bold;
+  color: #00bcd4;
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background-color: #00bcd4;
+  animation: blink 0.7s infinite;
+  margin-left: 3px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
